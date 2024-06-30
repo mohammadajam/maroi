@@ -106,47 +106,43 @@ union V4F32 {
 
 // Create Vectors
 
-static V2S32 v2s32(S32 x, S32 y);
-static V3S32 v3s32(S32 x, S32 y, S32 z);
-static V4S32 v4s32(S32 x, S32 y, S32 z, S32 w);
+V2S32 v2s32(S32 x, S32 y);
+V3S32 v3s32(S32 x, S32 y, S32 z);
+V4S32 v4s32(S32 x, S32 y, S32 z, S32 w);
 
-static V2F32 v2f32(F32 x, F32 y);
-static V3F32 v3f32(F32 x, F32 y, F32 z);
-static V4F32 v4f32(F32 x, F32 y, F32 z, F32 w);
+V2F32 v2f32(F32 x, F32 y);
+V3F32 v3f32(F32 x, F32 y, F32 z);
+V4F32 v4f32(F32 x, F32 y, F32 z, F32 w);
 
 // Vector Operators
 
 // S32
-static V2S32 operator+(V2S32 &a, V2S32 &b);
-static V3S32 operator+(V3S32 &a, V3S32 &b);
-static V4S32 operator+(V4S32 &a, V4S32 &b);
+V2S32 operator+(V2S32 &a, V2S32 &b);
+V3S32 operator+(V3S32 &a, V3S32 &b);
+V4S32 operator+(V4S32 &a, V4S32 &b);
 
-static V2S32 operator-(V2S32 &a, V2S32 &b);
-static V3S32 operator-(V3S32 &a, V3S32 &b);
-static V4S32 operator-(V4S32 &a, V4S32 &b);
+V2S32 operator-(V2S32 &a, V2S32 &b);
+V3S32 operator-(V3S32 &a, V3S32 &b);
+V4S32 operator-(V4S32 &a, V4S32 &b);
 
-static V2S32 operator*(V2S32 &a, V2S32 &b);
-static V3S32 operator*(V3S32 &a, V3S32 &b);
-static V4S32 operator*(V4S32 &a, V4S32 &b);
+V2S32 operator*(V2S32 &a, V2S32 &b);
+V3S32 operator*(V3S32 &a, V3S32 &b);
+V4S32 operator*(V4S32 &a, V4S32 &b);
 
 // F32
-static V2F32 operator+(V2F32 &a, V2F32 &b);
-static V3F32 operator+(V3F32 &a, V3F32 &b);
-static V4F32 operator+(V4F32 &a, V4F32 &b);
+V2F32 operator+(V2F32 &a, V2F32 &b);
+V3F32 operator+(V3F32 &a, V3F32 &b);
+V4F32 operator+(V4F32 &a, V4F32 &b);
 
-static V2F32 operator-(V2F32 &a, V2F32 &b);
-static V3F32 operator-(V3F32 &a, V3F32 &b);
-static V4F32 operator-(V4F32 &a, V4F32 &b);
+V2F32 operator-(V2F32 &a, V2F32 &b);
+V3F32 operator-(V3F32 &a, V3F32 &b);
+V4F32 operator-(V4F32 &a, V4F32 &b);
 
-static V2F32 operator*(V2F32 &a, V2F32 &b);
-static V3F32 operator*(V3F32 &a, V3F32 &b);
-static V4F32 operator*(V4F32 &a, V4F32 &b);
+V2F32 operator*(V2F32 &a, V2F32 &b);
+V3F32 operator*(V3F32 &a, V3F32 &b);
+V4F32 operator*(V4F32 &a, V4F32 &b);
 
 // Matrix
-
-//typedef S32 MatI4[4][4];
-//typedef F32 MatF4[4][4];
-
 typedef union {
     struct {
         S32 x1y1,x2y1,x3y1,x4y1;
@@ -167,12 +163,19 @@ typedef struct {
     F32 mat[4][4];
 } MatF4;
 
-static MatI4 operator+(MatI4 &a, MatI4 &b);
-static MatI4 operator-(MatI4 &a, MatI4 &b);
-static MatI4 operator*(MatI4 &a, MatI4 &b);
+#define IdentityMatI4 MatI4 {1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1}
+#define IdentityMatF4 MatI4 {1.0f,0.0f,0.0f,0.0f, 0.0f,1.0f,0.0f,0.0f, 0.0f,0.0f,1.0f,0.0f, 0.0f,0.0f,0.0f,1.0f}
 
-static MatF4 operator+(MatF4 &a, MatF4 &b);
-static MatF4 operator-(MatF4 &a, MatF4 &b);
-static MatF4 operator*(MatF4 &a, MatF4 &b);
+
+// Matrix Operators
+// MatI4
+MatI4 operator+(MatI4 &a, MatI4 &b);
+MatI4 operator-(MatI4 &a, MatI4 &b);
+MatI4 operator*(MatI4 &a, MatI4 &b);
+
+// MatF4
+MatF4 operator+(MatF4 &a, MatF4 &b);
+MatF4 operator-(MatF4 &a, MatF4 &b);
+MatF4 operator*(MatF4 &a, MatF4 &b);
 
 #endif
