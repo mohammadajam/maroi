@@ -5,7 +5,7 @@
 
 class VertexBuffer {
     public:
-        VertexBuffer(const void* data);
+        VertexBuffer(const void* data, U32 size);
         ~VertexBuffer();
 
         void bind() const;
