@@ -1,6 +1,5 @@
 #pragma once
 
-#include <GL/glew.h>
 #include "../base.h"
 
 class IndexBuffer {
@@ -11,6 +10,9 @@ class IndexBuffer {
         void bind() const;
         void unbind() const;
 
+        U32 getCount() const;
+
     private:
         U32 IndexBufferID;
+        U32 count;
 };

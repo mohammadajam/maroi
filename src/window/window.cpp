@@ -1,6 +1,6 @@
 #include "window.h"
 
-Window::Window(const int screenWidth, const int screenHeight, const char* title) {
+Window::Window(const S32 screenWidth, const S32 screenHeight, const char* title) {
     if(!glfwInit()) {
         std::cout << "ERROR: glfwInit\n";
         exit(-1);

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../base.h"
-#include <GL/glew.h>
 
 class VertexBuffer {
     public:

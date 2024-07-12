@@ -5,31 +5,12 @@
 #include <iostream>
 #include <signal.h>
 
-// Assert Macros
-
-bool GLLogCall(const char* function, const char* file, int line);
-
-#define GLClearError() while(glGetError() != GL_NO_ERROR);
-
-#if !defined(AssertBreak)
-#define AssertBreak() raise(SIGTRAP);
-#endif
-
-#define Assert(x) if (!(x)) AssertBreak();
-
-#define GLAssert(F) GLClearError();\
-    F;\
-    Assert(GLLogCall(#F, __FILE__, __LINE__));
-
-
 // Helper Macros
-
 #define ArrayCount(a) (sizeof(a)/sizeof(*(a)))
 
 #define EvalPrint(var) std::cout << #var << " = " << var << "\n";
 
 // Basic Data Types
-
 #include <stdint.h>
 
 typedef int8_t S8;
@@ -44,10 +25,24 @@ typedef uint64_t U64;
 typedef float F32;
 typedef double F64;
 
+// Assert Macros
+bool GLLogCall(const char* function, const char* file, S32 line);
+
+#define GLClearError() while(glGetError() != GL_NO_ERROR);
+
+#if !defined(AssertBreak)
+#define AssertBreak() raise(SIGTRAP);
+#endif
+
+#define Assert(x) if (!(x)) AssertBreak();
+
+#define GLAssert(F) GLClearError();\
+    F;\
+    Assert(GLLogCall(#F, __FILE__, __LINE__));
+
+
 // Vectors
-
 // Int Vectors
-
 union V2S32 {
     struct {
         S32 x;
@@ -76,7 +71,6 @@ union V4S32 {
 };
 
 // Float Vectors
-
 union V2F32 {
     struct {
         F32 x;
@@ -105,7 +99,6 @@ union V4F32 {
 };
 
 // Create Vectors
-
 V2S32 v2s32(S32 x, S32 y);
 V3S32 v3s32(S32 x, S32 y, S32 z);
 V4S32 v4s32(S32 x, S32 y, S32 z, S32 w);
@@ -115,7 +108,6 @@ V3F32 v3f32(F32 x, F32 y, F32 z);
 V4F32 v4f32(F32 x, F32 y, F32 z, F32 w);
 
 // Vector Operators
-
 // S32
 V2S32 operator+(V2S32 &a, V2S32 &b);
 V3S32 operator+(V3S32 &a, V3S32 &b);
@@ -165,7 +157,6 @@ typedef struct {
 
 #define IdentityMatI4 MatI4 {1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1}
 #define IdentityMatF4 MatI4 {1.0f,0.0f,0.0f,0.0f, 0.0f,1.0f,0.0f,0.0f, 0.0f,0.0f,1.0f,0.0f, 0.0f,0.0f,0.0f,1.0f}
-
 
 // Matrix Operators
 // MatI4

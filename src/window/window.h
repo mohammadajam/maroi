@@ -1,12 +1,12 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "../base.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
 class Window {
     public:
-        Window(const int screenWidth, const int screenHeight, const char* title);
+        Window(const S32 screenWidth, const S32 screenHeight, const char* title);
         ~Window();
 
         GLFWwindow* getWindow() const;

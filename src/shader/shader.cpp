@@ -1,10 +1,9 @@
 #include "shader.h"
 
 Shader::Shader(const char * vertex_file_path,const char * fragment_file_path) {
-    
 	// Create the shaders
-	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	U32 VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+	U32 FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
 	// Read the Vertex Shader code from the file
 	std::string VertexShaderCode;
@@ -30,8 +29,8 @@ Shader::Shader(const char * vertex_file_path,const char * fragment_file_path) {
 		FragmentShaderStream.close();
 	}
 
-	GLint Result = GL_FALSE;
-	int InfoLogLength;
+	S32 Result = GL_FALSE;
+	S32 InfoLogLength;
 
 	// Compile Vertex Shader
 	printf("Compiling shader : %s\n", vertex_file_path);
@@ -50,7 +49,7 @@ Shader::Shader(const char * vertex_file_path,const char * fragment_file_path) {
 
 	// Compile Fragment Shader
 	printf("Compiling shader : %s\n", fragment_file_path);
-	char const * FragmentSourcePointer = FragmentShaderCode.c_str();
+	char const* FragmentSourcePointer = FragmentShaderCode.c_str();
 	glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
 	glCompileShader(FragmentShaderID);
 	// Check Fragment Shader
@@ -63,7 +62,7 @@ Shader::Shader(const char * vertex_file_path,const char * fragment_file_path) {
 	}
 	// Link the program
 	printf("Linking program\n");
-	GLuint programID = glCreateProgram();
+	U32 programID = glCreateProgram();
 	glAttachShader(programID, VertexShaderID);
 	glAttachShader(programID, FragmentShaderID);
 	glLinkProgram(programID);
@@ -76,15 +75,10 @@ Shader::Shader(const char * vertex_file_path,const char * fragment_file_path) {
 		glGetProgramInfoLog(programID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}
-	/*
-	glDetachShader(programID, VertexShaderID);
-	glDetachShader(programID, FragmentShaderID);
-	*/
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
 
     ProgramID = programID;
-
 }
 
 Shader::~Shader() {
@@ -93,10 +87,4 @@ Shader::~Shader() {
 
 void Shader::useShader() {
     glUseProgram(ProgramID);
-}
-
-void Shader::setUniformMVP(glm::mat4 MVP) {
-    GLuint matrixID = glGetUniformLocation(ProgramID, "MVP");
-
-    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 }
